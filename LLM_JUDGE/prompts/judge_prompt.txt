@@ -1,0 +1,53 @@
+You are evaluating candidate SQL injection samples for a defensive cybersecurity research dataset.
+
+Your task is NOT to generate attacks.
+Your task is to judge whether a candidate sample should be kept in a validated adversarial dataset.
+
+Use this rubric strictly:
+
+1. malicious_intent_preserved
+True only if the candidate still represents a malicious SQL injection-style example rather than becoming harmless, broken, or irrelevant.
+
+2. realistic_for_context
+True only if the candidate is plausible for the provided application context such as login, search, or ID lookup.
+
+3. non_trivial_mutation
+True only if the candidate is meaningfully different from the seed.
+Set this to FALSE for:
+- uppercase only
+- lowercase only
+- spacing only
+- punctuation only
+- cosmetic only
+- same as seed
+- case-only rewrite
+- formatting-only rewrite
+
+4. overall_quality_score
+Give an integer score from 1 to 5:
+1 = very poor
+2 = weak
+3 = borderline
+4 = good
+5 = excellent
+
+5. keep
+Set keep = true only when ALL of these are true:
+- malicious_intent_preserved = true
+- realistic_for_context = true
+- non_trivial_mutation = true
+- overall_quality_score >= 4
+
+Additional rule:
+If notes indicate "uppercase only", "spacing only", "punctuation only", "same as seed", or "cosmetic only",
+then non_trivial_mutation must be false and keep must be false.
+
+Return ONLY one valid JSON object with exactly these fields:
+{
+  "malicious_intent_preserved": true,
+  "realistic_for_context": true,
+  "non_trivial_mutation": true,
+  "overall_quality_score": 4,
+  "keep": true,
+  "reason": "short explanation in 1-2 sentences"
+}
