@@ -1,0 +1,63 @@
+
+════════════════════════════════════════════════════════════
+  Dataset : SQL_injection_Dataset_features.csv
+  Rows    : 30,919
+  Classes : 11,382 malicious  |  19,537 benign
+════════════════════════════════════════════════════════════
+
+Running.................... done (94.6s, 327 q/s)
+
+────────────────────────────────────────────────────────────
+  SANDBOX EXECUTION PATH  (27,525 queries)
+────────────────────────────────────────────────────────────
+  Accuracy               0.9954
+  Precision              0.9985
+  Recall                 0.9863
+  F1                     0.9924
+  False Positive Rate    0.0006
+  TP=8,194  FP=12  TN=19,205  FN=114
+  Predicted malicious : 8,206  |  Predicted benign : 19,319
+────────────────────────────────────────────────────────────
+  STATIC FILTER PATH  (3,394 queries)
+────────────────────────────────────────────────────────────
+  Accuracy               0.9976
+  Precision              1.0000
+  Recall                 0.9974
+  F1                     0.9987
+  False Positive Rate    0.0000
+  TP=3,066  FP=0  TN=320  FN=8
+  Predicted malicious : 3,066  |  Predicted benign : 328
+
+════════════════════════════════════════════════════════════
+  PERFORMANCE METRICS
+────────────────────────────────────────────────────────────
+  Accuracy               0.9957  ██████████████████████████████
+  Precision (PPV)        0.9989  ██████████████████████████████
+  Recall (Sensitivity)   0.9893  ██████████████████████████████
+  Specificity (TNR)      0.9994  ██████████████████████████████
+  F1 Score               0.9941  ██████████████████████████████
+  False Positive Rate    0.0006  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+────────────────────────────────────────────────────────────
+  CONFUSION MATRIX
+                     Predicted
+                  Malicious  Benign
+  Actual Malicious   11,260     122   (detection rate: 98.9%)
+  Actual Benign          12  19,525   (false alarm rate: 0.1%)
+════════════════════════════════════════════════════════════
+
+  DETECTION BREAKDOWN  (true positives only)
+────────────────────────────────────────────────────────────
+  blind_time                         5,794  (51.5%)
+  tautology                          2,811  (25.0%)
+  blind_boolean                      1,280  (11.4%)
+  union_based                        1,220  (10.8%)
+  comment_obfuscation                  128  (1.1%)
+  stacked_queries                       13  (0.1%)
+  cross_db_probe                        12  (0.1%)
+  encoding_obfuscation                   1  (0.0%)
+  nested_injection                       1  (0.0%)
+════════════════════════════════════════════════════════════
+
+  Accuracy=99.57%  F1=0.9941  Precision=0.9989  Recall=0.9893  FPR=0.0006
+  TP=11,260  FP=12  TN=19,525  FN=122
+
