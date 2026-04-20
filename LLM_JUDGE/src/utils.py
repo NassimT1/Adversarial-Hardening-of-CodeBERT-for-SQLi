@@ -115,14 +115,21 @@ def _resolve_seed_payload(row: Dict[str, Any], payload: str) -> tuple[str, bool]
     return seed_payload, True
 
 
-def normalize_candidate_row(row: Dict[str, Any]) -> Dict[str, Any]:
-    """
-    Converts multiple possible upstream schemas into one stable schema used by run_judge.py.
+def parse_binary_label(value: Any, default: int = 1) -> int:
+    text = _normalize(value)
 
-    Supported sources:
-    - teammate pipeline CSV with payload/full_query/template_context/etc.
-    - older local judge_samples-style CSV with seed_query/candidate_query/context/etc.
-    """
+    if text in {"1", "true", "yes", "y", "malicious", "attack", "sqli", "sql_injection", "positive"}:
+        return 1
+    if text in {"0", "false", "no", "n", "benign", "safe", "normal", "negative"}:
+        return 0
+
+    try:
+        return int(float(text))
+    except Exception:
+        return default
+
+
+def normalize_candidate_row(row: Dict[str, Any]) -> Dict[str, Any]:
     query_id = (
         row.get("query_id")
         or row.get("id")
@@ -155,6 +162,12 @@ def normalize_candidate_row(row: Dict[str, Any]) -> Dict[str, Any]:
     template_context = row.get("template_context") or row.get("context") or "search"
     template_context = LEGACY_CONTEXT_REMAP.get(str(template_context).strip(), str(template_context).strip())
 
+    raw_label = (
+        row.get("label")
+        if "label" in row
+        else row.get("gold_label", row.get("class_label", row.get("is_malicious", 1)))
+    )
+
     normalized = {
         "query_id": _normalize_query_id(query_id),
         "seed_payload": str(seed_payload),
@@ -163,7 +176,7 @@ def normalize_candidate_row(row: Dict[str, Any]) -> Dict[str, Any]:
         "full_query": str(full_query),
         "llm_attack_category": str(attack_category),
         "template_context": str(template_context),
-        "label": _safe_int(row.get("label", 1), default=1),
+        "label": parse_binary_label(raw_label, default=1),
         "mutation_count": _safe_int(row.get("mutation_count", 1), default=1),
         "codebert_score": _safe_float(row.get("codebert_score", 0.0), default=0.0),
         "ast_is_valid": _is_true_like(row.get("ast_is_valid", row.get("syntax_valid", True))),
@@ -256,7 +269,7 @@ def _seed_similarity(row: Dict[str, Any]) -> Optional[float]:
     return _similarity(row["seed_payload"], row["payload"])
 
 
-def heuristic_judge(row: Dict[str, Any]) -> Tuple[Dict[str, Any], str]:
+def heuristic_judge(row: Dict[str, Any], similarity_threshold: float = 0.93) -> Tuple[Dict[str, Any], str]:
     seed_payload = row.get("seed_payload", "")
     payload = row["payload"]
     full_query = row["full_query"]
@@ -288,7 +301,7 @@ def heuristic_judge(row: Dict[str, Any]) -> Tuple[Dict[str, Any], str]:
     )
 
     non_trivial_mutation = True
-    if sim is not None and sim >= 0.93:
+    if sim is not None and sim >= similarity_threshold:
         non_trivial_mutation = False
     if _contains_any(joined, TRIVIAL_MUTATION_KEYWORDS):
         non_trivial_mutation = False
@@ -299,8 +312,6 @@ def heuristic_judge(row: Dict[str, Any]) -> Tuple[Dict[str, Any], str]:
     if not realistic_for_context:
         score -= 1
     if not non_trivial_mutation:
-        score -= 1
-    if sim is not None and sim >= 0.97:
         score -= 1
     score = max(1, min(5, score))
 
@@ -391,9 +402,11 @@ def ollama_local_generate(system_prompt: str, user_prompt: str) -> str:
     return text
 
 
-def apply_hard_rules(row: Dict[str, Any], parsed: Dict[str, Any]) -> Dict[str, Any]:
-    payload = row["payload"]
-    full_query = row["full_query"]
+def apply_hard_rules(
+    row: Dict[str, Any],
+    parsed: Dict[str, Any],
+    similarity_threshold: float = 0.93,
+) -> Dict[str, Any]:
     notes = _normalize(row.get("notes", ""))
     context = _normalize(row["template_context"])
     syntax_ok = bool(row["ast_is_valid"])
@@ -422,11 +435,14 @@ def apply_hard_rules(row: Dict[str, Any], parsed: Dict[str, Any]) -> Dict[str, A
         result["overall_quality_score"] = min(int(result["overall_quality_score"]), 2)
         reason_parts.append("Rejected by hard rule because notes indicate a trivial mutation.")
 
-    if sim is not None and sim >= 0.93:
+    if sim is not None and sim >= similarity_threshold:
         result["non_trivial_mutation"] = False
         result["keep"] = False
         result["overall_quality_score"] = min(int(result["overall_quality_score"]), 2)
-        reason_parts.append(f"Rejected by hard rule because seed/candidate similarity is too high ({sim:.2f}).")
+        reason_parts.append(
+            f"Rejected by hard rule because seed/candidate similarity is too high "
+            f"({sim:.2f} >= {similarity_threshold:.2f})."
+        )
 
     if _contains_any(notes, UNREALISTIC_OR_BROKEN_KEYWORDS):
         result["realistic_for_context"] = False
